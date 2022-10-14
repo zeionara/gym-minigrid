@@ -9,12 +9,12 @@ class CrossingEnv(MiniGridEnv):
     Environment with wall or lava obstacles, sparse reward.
     """
 
-    def __init__(self, size=9, num_crossings=1, obstacle_type=Lava, seed=None):
+    def __init__(self, size=9, num_crossings=1, obstacle_type=Lava, seed=None, max_steps = None):
         self.num_crossings = num_crossings
         self.obstacle_type = obstacle_type
         super().__init__(
             grid_size=size,
-            max_steps=4*size*size,
+            max_steps=4*size*size if max_steps is None else max_steps,
             # Set this to True for maximum speed
             see_through_walls=False,
             seed=None
@@ -83,20 +83,20 @@ class CrossingEnv(MiniGridEnv):
         )
 
 class LavaCrossingEnv(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=1)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=1, max_steps=max_steps)
 
 class LavaCrossingS9N2Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=2)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=2, max_steps=max_steps)
 
 class LavaCrossingS9N3Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=3)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=3, max_steps=max_steps)
 
 class LavaCrossingS11N5Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=11, num_crossings=5)
+    def __init__(self, max_steps = None):
+        super().__init__(size=11, num_crossings=5, max_steps=max_steps)
 
 register(
     id='MiniGrid-LavaCrossingS9N1-v0',
@@ -119,20 +119,20 @@ register(
 )
 
 class SimpleCrossingEnv(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=1, obstacle_type=Wall)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=1, obstacle_type=Wall, max_steps=max_steps)
 
 class SimpleCrossingS9N2Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=2, obstacle_type=Wall)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=2, obstacle_type=Wall, max_steps=max_steps)
 
 class SimpleCrossingS9N3Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=9, num_crossings=3, obstacle_type=Wall)
+    def __init__(self, max_steps = None):
+        super().__init__(size=9, num_crossings=3, obstacle_type=Wall, max_steps=max_steps)
 
 class SimpleCrossingS11N5Env(CrossingEnv):
-    def __init__(self):
-        super().__init__(size=11, num_crossings=5, obstacle_type=Wall)
+    def __init__(self, max_steps = None):
+        super().__init__(size=11, num_crossings=5, obstacle_type=Wall, max_steps=max_steps)
 
 register(
     id='MiniGrid-SimpleCrossingS9N1-v0',
