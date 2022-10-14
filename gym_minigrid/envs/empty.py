@@ -11,13 +11,14 @@ class EmptyEnv(MiniGridEnv):
         size=8,
         agent_start_pos=(1,1),
         agent_start_dir=0,
+        max_steps=None
     ):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
 
         super().__init__(
             grid_size=size,
-            max_steps=4*size*size,
+            max_steps=4*size*size if max_steps is None else max_steps,
             # Set this to True for maximum speed
             see_through_walls=True
         )
@@ -42,24 +43,25 @@ class EmptyEnv(MiniGridEnv):
         self.mission = "get to the green goal square"
 
 class EmptyEnv5x5(EmptyEnv):
-    def __init__(self, **kwargs):
-        super().__init__(size=5, **kwargs)
+    def __init__(self, max_steps = None, **kwargs):
+        super().__init__(size=5, max_steps = max_steps, **kwargs)
 
 class EmptyRandomEnv5x5(EmptyEnv):
-    def __init__(self):
-        super().__init__(size=5, agent_start_pos=None)
+    def __init__(self, max_steps = None):
+        super().__init__(size=5, max_steps = max_steps, agent_start_pos=None)
 
 class EmptyEnv6x6(EmptyEnv):
-    def __init__(self, **kwargs):
-        super().__init__(size=6, **kwargs)
+    def __init__(self, max_steps = None, **kwargs):
+        super().__init__(size=6, max_steps = max_steps, **kwargs)
 
 class EmptyRandomEnv6x6(EmptyEnv):
-    def __init__(self):
-        super().__init__(size=6, agent_start_pos=None)
+    def __init__(self, max_steps = None):
+        super().__init__(size=6, max_steps = max_steps, agent_start_pos=None)
 
 class EmptyEnv16x16(EmptyEnv):
-    def __init__(self, **kwargs):
-        super().__init__(size=16, **kwargs)
+    def __init__(self, max_steps = None, **kwargs):
+        super().__init__(size=16, max_steps = max_steps, **kwargs)
+
 
 register(
     id='MiniGrid-Empty-5x5-v0',
