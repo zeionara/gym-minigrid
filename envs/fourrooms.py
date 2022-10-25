@@ -7,7 +7,7 @@ class FourRoomsEnv(MiniGridEnv):
     Can specify agent and goal position, if not it set at random.
     """
 
-    def __init__(self, agent_pos=None, goal_pos=None, **kwargs):
+    def __init__(self, agent_pos=None, goal_pos=None, max_steps: int = None, **kwargs):
         self._agent_default_pos = agent_pos
         self._goal_default_pos = goal_pos
 
@@ -18,7 +18,7 @@ class FourRoomsEnv(MiniGridEnv):
             mission_space=mission_space,
             width=self.size,
             height=self.size,
-            max_steps=100,
+            max_steps=100 if max_steps is None else max_steps,
             **kwargs
         )
 

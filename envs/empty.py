@@ -6,7 +6,7 @@ class EmptyEnv(MiniGridEnv):
     Empty grid environment, no obstacles, sparse reward
     """
 
-    def __init__(self, size=8, agent_start_pos=(1, 1), agent_start_dir=0, **kwargs):
+    def __init__(self, size=8, agent_start_pos=(1, 1), agent_start_dir=0, max_steps: int = None, see_through_walls: bool = True, **kwargs):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
 
@@ -17,9 +17,9 @@ class EmptyEnv(MiniGridEnv):
         super().__init__(
             mission_space=mission_space,
             grid_size=size,
-            max_steps=4 * size * size,
+            max_steps=4 * size * size if max_steps is None else max_steps,
             # Set this to True for maximum speed
-            see_through_walls=True,
+            see_through_walls=see_through_walls,
             **kwargs
         )
 

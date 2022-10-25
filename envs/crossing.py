@@ -10,7 +10,7 @@ class CrossingEnv(MiniGridEnv):
     Environment with wall or lava obstacles, sparse reward.
     """
 
-    def __init__(self, size=9, num_crossings=1, obstacle_type=Lava, **kwargs):
+    def __init__(self, size=9, num_crossings=1, obstacle_type=Lava, max_steps: int = None, **kwargs):
         self.num_crossings = num_crossings
         self.obstacle_type = obstacle_type
 
@@ -26,7 +26,7 @@ class CrossingEnv(MiniGridEnv):
         super().__init__(
             mission_space=mission_space,
             grid_size=size,
-            max_steps=4 * size * size,
+            max_steps=4 * size * size if max_steps is None else max_steps,
             # Set this to True for maximum speed
             see_through_walls=False,
             **kwargs

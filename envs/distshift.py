@@ -13,6 +13,7 @@ class DistShiftEnv(MiniGridEnv):
         agent_start_pos=(1, 1),
         agent_start_dir=0,
         strip2_row=2,
+        max_steps: int = None,
         **kwargs
     ):
         self.agent_start_pos = agent_start_pos
@@ -28,7 +29,7 @@ class DistShiftEnv(MiniGridEnv):
             mission_space=mission_space,
             width=width,
             height=height,
-            max_steps=4 * width * height,
+            max_steps=4 * width * height if max_steps is None else max_steps,
             # Set this to True for maximum speed
             see_through_walls=True,
             **kwargs

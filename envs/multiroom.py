@@ -22,7 +22,7 @@ class MultiRoomEnv(MiniGridEnv):
     Environment with multiple rooms (subgoals)
     """
 
-    def __init__(self, minNumRooms, maxNumRooms, maxRoomSize=10, **kwargs):
+    def __init__(self, minNumRooms, maxNumRooms, maxRoomSize=10, max_steps: int = None, **kwargs):
         assert minNumRooms > 0
         assert maxNumRooms >= minNumRooms
         assert maxRoomSize >= 4
@@ -43,7 +43,7 @@ class MultiRoomEnv(MiniGridEnv):
             mission_space=mission_space,
             width=self.size,
             height=self.size,
-            max_steps=self.maxNumRooms * 20,
+            max_steps=self.maxNumRooms * 20 if max_steps is None else max_steps,
         )
 
     def _gen_grid(self, width, height):
