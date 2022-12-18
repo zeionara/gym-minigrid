@@ -12,7 +12,8 @@ class DistShiftEnv(MiniGridEnv):
         height=7,
         agent_start_pos=(1,1),
         agent_start_dir=0,
-        strip2_row=2
+        strip2_row=2,
+        max_steps=None
     ):
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
@@ -22,7 +23,7 @@ class DistShiftEnv(MiniGridEnv):
         super().__init__(
             width=width,
             height=height,
-            max_steps=4*width*height,
+            max_steps=4*width*height if max_steps is None else max_steps,
             # Set this to True for maximum speed
             see_through_walls=True
         )
@@ -52,12 +53,12 @@ class DistShiftEnv(MiniGridEnv):
         self.mission = "get to the green goal square"
 
 class DistShift1(DistShiftEnv):
-    def __init__(self):
-        super().__init__(strip2_row=2)
+    def __init__(self, max_steps = None):
+        super().__init__(strip2_row=2, max_steps = max_steps)
 
 class DistShift2(DistShiftEnv):
-    def __init__(self):
-        super().__init__(strip2_row=5)
+    def __init__(self, max_steps = None):
+        super().__init__(strip2_row=5, max_steps = max_steps)
 
 register(
     id='MiniGrid-DistShift1-v0',
